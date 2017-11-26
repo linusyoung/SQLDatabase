@@ -44,3 +44,10 @@ CREATE TABLE dbo.CustomerOrder
 	OrderAmount decimal(18,2) NOT NULL
 );
 GO
+
+ALTER TABLE dbo.CustomerOrder
+	ADD CONSTRAINT FK_CustomerOrder_Customer
+	FOREIGN KEY (CustomerID)
+	REFERENCES dbo.Customer(CustomerID)
+	ON DELETE CASCADE;
+GO
