@@ -20,3 +20,27 @@ GO
 
 ALTER TABLE SalesLT.Courier CHECK CONSTRAINT [CK_Courier_ReviewDate];
 GO
+
+-- foreign key actions
+-- 1. NO ACTION, 2. CASCADE, 3. SET DEFAULT, 4. SET NULL
+-- examples
+
+CREATE TABLE dbo.Customer
+(
+	CustomerID int IDENTITY(1,1) PRIMARY KEY,
+	CustomerName nvarchar(50) NOT NULL
+);
+GO
+
+INSERT dbo.Customer
+	VALUES ('Marchin A'), ('Test B');
+GO
+
+CREATE TABLE dbo.CustomerOrder
+(
+	CustomerOrderID int IDENTITY(100000,1) PRIMARY KEY,
+	CustomerID int NOT NULL
+		FOREIGN KEY REFERENCES dbo.Customer(CustomerID),
+	OrderAmount decimal(18,2) NOT NULL
+);
+GO
